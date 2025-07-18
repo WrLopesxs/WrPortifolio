@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wender Lopes - Desenvolvedor em Formação</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #2c3e50;
+            --secondary: #3498db;
+            --accent: #e74c3c;
+            --light: #ecf0f1;
+            --dark: #1a252f;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f7fa;
+            color: #333;
+            overflow-x: hidden;
+        }
+        
+        /* Animated Background */
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+            background-size: 400% 400%;
+            animation: gradient 15s ease infinite;
+        }
+        
+        @keyframes gradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        /* Header */
+        header {
+            background-color: rgba(44, 62, 80, 0.9);
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        
+        .header-content {
+            position: relative;
+            z-index: 2;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .profile-pic {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 5px solid var(--secondary);
+            margin-bottom: 1rem;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease;
+        }
+        
+        .profile-pic:hover {
+            transform: scale(1.05) rotate(5deg);
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            animation: fadeInDown 1s ease;
+        }
+        
+        .title {
+            font-size: 1.2rem;
+            color: var(--secondary);
+            margin-bottom: 1.5rem;
+            animation: fadeInUp 1s ease 0.3s both;
+        }
+        
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            margin-top: 1rem;
+            animation: fadeIn 1s ease 0.6s both;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--light);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .contact-item:hover {
+            color: var(--secondary);
+        }
+        
+        /* Floating Particles */
+        .particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+        
+        .particle {
+            position: absolute;
+            background-color: rgba(255, 255, 255, 0.5);
+            border-radius: 50%;
+            animation: float linear infinite;
+        }
+        
+        @keyframes float {
+            0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(-100vh) rotate(360deg); opacity: 0; }
+        }
+        
+        /* Main Content */
+        main {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 20px;
+        }
+        
+        section {
+            background-color: white;
+            border-radius: 10px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+        
+        section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 5px;
+            height: 100%;
+            background-color: var(--secondary);
+        }
+        
+        h2 {
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            font-size: 1.8rem;
+            position: relative;
+            display: inline-block;
+        }
+        
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background-color: var(--accent);
+        }
+        
+        /* Cards */
+        .card-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+        
+        .card {
+            background-color: white;
+            border-radius: 8px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            border: 1px solid #eee;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+        }
+        
+        .card h3 {
+            color: var(--primary);
+            margin-bottom: 0.8rem;
+            font-size: 1.3rem;
+        }
+        
+        .card p {
+            color: #666;
+            line-height: 1.6;
+        }
+        
+        .card .icon {
+            font-size: 2.5rem;
+            color: var(--secondary);
+            margin-bottom: 1rem;
+        }
+        
+        /* Skills */
+        .skills-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        
+        .skill {
+            background-color: var(--light);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            color: var(--dark);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s ease;
+        }
+        
+        .skill:hover {
+            background-color: var(--secondary);
+            color: white;
+            transform: scale(1.05);
+        }
+        
+        .skill i {
+            font-size: 1rem;
+        }
+        
+        /* Timeline */
+        .timeline {
+            position: relative;
+            padding-left: 50px;
+        }
+        
+        .timeline::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 20px;
+            height: 100%;
+            width: 2px;
+            background-color: var(--secondary);
+        }
+        
+        .timeline-item {
+            position: relative;
+            margin-bottom: 2rem;
+        }
+        
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            top: 5px;
+            left: -38px;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background-color: var(--accent);
+            border: 3px solid var(--secondary);
+        }
+        
+        .timeline-date {
+            font-size: 0.9rem;
+            color: var(--secondary);
+            font-weight: bold;
+        }
+        
+        .timeline-content {
+            background-color: var(--light);
+            padding: 1rem;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+        }
+        
+        /* Projects */
+        .project {
+            margin-bottom: 2rem;
+            border-left: 3px solid var(--secondary);
+            padding-left: 1rem;
+        }
+        
+        .project h3 {
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+        
+        .project p {
+            color: #666;
+            margin-bottom: 0.5rem;
+        }
+        
+        .project-tech {
+            font-size: 0.8rem;
+            color: var(--secondary);
+            font-weight: bold;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 3rem;
+        }
+        
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+        }
+        
+        .social-link {
+            color: white;
+            font-size: 1.5rem;
+            transition: color 0.3s ease, transform 0.3s ease;
+        }
+        
+        .social-link:hover {
+            color: var(--secondary);
+            transform: translateY(-5px);
+        }
+        
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes fadeInDown {
+            from { 
+                opacity: 0; 
+                transform: translateY(-20px);
+            }
+            to { 
+                opacity: 1; 
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes fadeInUp {
+            from { 
+                opacity: 0; 
+                transform: translateY(20px);
+            }
+            to { 
+                opacity: 1; 
+                transform: translateY(0);
+            }
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .card-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .header-content {
+                padding: 0 15px;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .title {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Animated Background -->
+    <div class="bg-animation"></div>
+    
+    <!-- Floating Particles -->
+    <div class="particles" id="particles-js"></div>
+    
+    <!-- Header -->
+    <header>
+        <div class="header-content">
+            <img src="https://avatars.githubusercontent.com/u/123456789?v=4" alt="Wender Lopes" class="profile-pic">
+            <h1>Wender Lopes</h1>
+            <p class="title">Desenvolvedor de Sistemas em Formação</p>
+            
+            <div class="contact-info">
+                <a href="https://goo.gl/maps/SorocabaSP" target="_blank" class="contact-item">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span>Sorocaba - SP</span>
+                </a>
+                <a href="tel:+5515992587986" class="contact-item">
+                    <i class="fas fa-phone"></i>
+                    <span>(15) 99258-7986</span>
+                </a>
+                <a href="mailto:wender.lopesxs@gmail.com" class="contact-item">
+                    <i class="fas fa-envelope"></i>
+                    <span>wender.lopesxs@gmail.com</span>
+                </a>
+                <a href="https://github.com/WrLopesxs?tab=repositories" target="_blank" class="contact-item">
+                    <i class="fab fa-github"></i>
+                    <span>GitHub</span>
+                </a>
+            </div>
+        </div>
+    </header>
+    
+    <main>
+        <!-- About Section -->
+        <section id="about">
+            <h2>Sobre Mim</h2>
+            <div class="card">
+                <p>Sou um estudante dedicado e comprometido com o crescimento pessoal e profissional. Busco constantemente me desenvolver em áreas como programação e análise de dados, com o objetivo de atuar futuramente como Analista de Dados em grandes empresas de tecnologia. Tenho facilidade para trabalhar em equipe, aprender novas ferramentas e assumir responsabilidades.
+Além da tecnologia, atuo como músico em minha igreja, o que fortalece minha disciplina, foco e sensibilidade.</p>
+            
+            </div>
+        </section>
+        
+        <!-- Education Section -->
+        <section id="education">
+            <h2>Formação Acadêmica</h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <span class="timeline-date">2024 - 2025</span>
+                    <div class="timeline-content">
+                        <h3>ETEC Fernando Prestes – Sorocaba/SP</h3>
+                        <p>Curso Técnico Integrado ao Ensino Médio em Desenvolvimento de Sistemas</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Skills Section -->
+        <section id="skills">
+            <h2>Conhecimentos Técnicos</h2>
+            <div class="card-container">
+                <div class="card">
+                    <div class="icon"><i class="fas fa-code"></i></div>
+                    <h3>Linguagens de Programação</h3>
+                    <div class="skills-container">
+                        <span class="skill"><i class="fab fa-microsoft"></i> C#</span>
+                       
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="icon"><i class="fas fa-database"></i></div>
+                    <h3>Banco de Dados</h3>
+                    <div class="skills-container">
+                        <span class="skill"><i class="fas fa-table"></i> Criação de tabelas</span>
+                        <span class="skill"><i class="fas fa-search"></i> Consultas SQL</span>
+                        <span class="skill"><i class="fas fa-link"></i> Joins</span>
+                        <span class="skill"><i class="fas fa-cogs"></i> Procedures</span>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="icon"><i class="fas fa-laptop-code"></i></div>
+                    <h3>Ferramentas & Ambientes</h3>
+                    <div class="skills-container">
+                        <span class="skill"><i class="fas fa-window-maximize"></i> Windows Forms</span>
+                        <span class="skill"><i class="fas fa-code-branch"></i> Git/GitHub</span>
+                        <span class="skill"><i class="fab fa-microsoft"></i> Visual Studio</span>
+                        <span class="skill"><i class="fas fa-file-word"></i> Pacote Office</span>
+                         <span class="skill"><i class="fas fa-database"></i> SQL</span>
+                        <span class="skill"><i class="fab fa-html5"></i> HTML</span>
+                        <span class="skill"><i class="fab fa-css3-alt"></i> CSS</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Projects Section -->
+        <section id="projects">
+            <h2>Projetos Acadêmicos</h2>
+            <div class="project">
+                <h3>Aplicações com C# e SQL Server</h3>
+                <p>Desenvolvimento de aplicações completas utilizando C# para lógica de negócios e SQL Server para armazenamento e manipulação de dados.</p>
+                <p class="project-tech">Tecnologias: C#, SQL Server, Windows Forms</p>
+            </div>
+            
+            <div class="project">
+                <h3>Formulários com Interface Gráfica</h3>
+                <p>Criação de formulários interativos utilizando Windows Forms, com validações e integração com banco de dados.</p>
+                <p class="project-tech">Tecnologias: C#, Windows Forms</p>
+            </div>
+            
+            <div class="project">
+                <h3>Manipulação de Dados Relacionais</h3>
+                <p>Implementação de consultas complexas, joins entre tabelas e procedures para manipulação eficiente de dados.</p>
+                <p class="project-tech">Tecnologias: SQL Server, T-SQL</p>
+            </div>
+        </section>
+        
+        <!-- Languages Section -->
+        <section id="languages">
+            <h2>Idiomas</h2>
+            <div class="card-container">
+                <div class="card">
+                    <div class="icon"><i class="fas fa-language"></i></div>
+                    <h3>Português</h3>
+                    <p>Nativo</p>
+                </div>
+                
+                <div class="card">
+                    <div class="icon"><i class="fas fa-language"></i></div>
+                    <h3>Inglês</h3>
+                    <p>Intermediário (em desenvolvimento)</p>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Objective Section -->
+        <section id="objective">
+            <h2>Objetivo Profissional</h2>
+            <div class="card">
+                <p>Busco uma oportunidade como Jovem Aprendiz ou Estagiário na área de Desenvolvimento de Sistemas, onde possa aplicar meus conhecimentos em programação e banco de dados, ao mesmo tempo em que aprendo novas tecnologias e melhores práticas de desenvolvimento.</p>
+                <p>Tenho grande interesse em evoluir profissionalmente no setor de tecnologia, com foco especial em desenvolvimento de software e análise de dados, áreas que combinan minha paixão por resolver problemas com minha curiosidade analítica.</p>
+            </div>
+        </section>
+    </main>
+    
+    <footer>
+        <h3>Vamos conversar!</h3>
+        <p>Estou aberto a oportunidades e colaborações. Entre em contato!</p>
+        
+        <div class="social-links">
+            <a href="mailto:wender.lopesxs@gmail.com" class="social-link" title="Email">
+                <i class="fas fa-envelope"></i>
+            </a>
+            <a href="https://github.com/WrLopesxs" target="_blank" class="social-link" title="GitHub">
+                <i class="fab fa-github"></i>
+            </a>
+            <a href="tel:+5515992587986" class="social-link" title="Telefone">
+                <i class="fas fa-phone"></i>
+            </a>
+        </div>
+        
+        <p>&copy; 2023 Wender Lopes. Todos os direitos reservados.</p>
+    </footer>
+    
+    <script>
+        // Create floating particles
+        document.addEventListener('DOMContentLoaded', function() {
+            const particlesContainer = document.getElementById('particles-js');
+            const particleCount = 30;
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.classList.add('particle');
+                
+                // Random size between 5px and 15px
+                const size = Math.random() * 10 + 5;
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+                
+                // Random position
+                particle.style.left = `${Math.random() * 100}%`;
+                particle.style.bottom = `-${size}px`;
+                
+                // Random animation duration between 10s and 20s
+                const duration = Math.random() * 10 + 10;
+                particle.style.animationDuration = `${duration}s`;
+                
+                // Random delay
+                particle.style.animationDelay = `${Math.random() * 10}s`;
+                
+                particlesContainer.appendChild(particle);
+            }
+            
+            // Animate sections on scroll
+            const sections = document.querySelectorAll('section');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, { threshold: 0.1 });
+            
+            sections.forEach(section => {
+                section.style.opacity = '0';
+                section.style.transform = 'translateY(20px)';
+                section.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                observer.observe(section);
+            });
+        });
+    </script>
+</body>
+</html>
